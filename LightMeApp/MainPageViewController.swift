@@ -14,5 +14,6 @@ class MainPageViewController: UIViewController {
         // Do any additional setup after loading the view.
 //        setup()
         view.backgroundColor = .yellow
+        navigationItem.hidesBackButton = true
     }
 }

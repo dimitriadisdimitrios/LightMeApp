@@ -191,8 +191,8 @@ class LogInViewController: UIViewController {
     
     @objc func connectBtnPressed(_ sender: UIView) {
         let vc = MainPageViewController()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true)
+        vc.modalPresentationStyle = .overFullScreen
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
