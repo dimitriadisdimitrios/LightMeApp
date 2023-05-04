@@ -52,7 +52,7 @@ class LogInViewController: UIViewController {
         NSLayoutConstraint.activate([
             deloitteLogoImage.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             deloitteLogoImage.trailingAnchor.constraint(equalTo: welcomeLabel.leadingAnchor, constant: -15),
-            deloitteLogoImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            deloitteLogoImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 40),
             deloitteLogoImage.heightAnchor.constraint(equalToConstant: 26)
         ])
         
@@ -62,9 +62,8 @@ class LogInViewController: UIViewController {
         mobileIconImage.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(mobileIconImage)
         NSLayoutConstraint.activate([
-//            mobileIconImage.leadingAnchor.constraint(equalTo: welcomeLabel.trailingAnchor, constant: 20),
             mobileIconImage.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-            mobileIconImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            mobileIconImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 50),
             mobileIconImage.bottomAnchor.constraint(equalTo: welcomeLabel.bottomAnchor),
             mobileIconImage.widthAnchor.constraint(equalToConstant: 60)
         ])
@@ -76,11 +75,10 @@ class LogInViewController: UIViewController {
         view.addSubview(usernameBackground)
         NSLayoutConstraint.activate([
             usernameBackground.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            usernameBackground.bottomAnchor.constraint(equalTo: view.centerYAnchor, constant: -40),
-            usernameBackground.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -150),
-            usernameBackground.heightAnchor.constraint(equalToConstant:100)
+            usernameBackground.bottomAnchor.constraint(equalTo: view.centerYAnchor, constant: -30),
+            usernameBackground.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -140),
+            usernameBackground.heightAnchor.constraint(equalToConstant: 130)
         ])
-        
         
         let usernameLabel = UILabel()
         usernameLabel.text = "Username"
@@ -92,7 +90,7 @@ class LogInViewController: UIViewController {
         NSLayoutConstraint.activate([
             usernameLabel.widthAnchor.constraint(lessThanOrEqualToConstant: 200),
             usernameLabel.heightAnchor.constraint(equalToConstant: 20),
-            usernameLabel.topAnchor.constraint(equalTo: usernameBackground.topAnchor, constant: 20),
+            usernameLabel.topAnchor.constraint(equalTo: usernameBackground.topAnchor, constant: 30),
             usernameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20)
         ])
         
@@ -116,9 +114,9 @@ class LogInViewController: UIViewController {
         view.addSubview(passwordBackground)
         NSLayoutConstraint.activate([
             passwordBackground.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            passwordBackground.topAnchor.constraint(equalTo: view.centerYAnchor, constant: 40),
-            passwordBackground.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 150),
-            passwordBackground.heightAnchor.constraint(equalToConstant: 100)
+            passwordBackground.topAnchor.constraint(equalTo: view.centerYAnchor, constant: 30),
+            passwordBackground.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 140),
+            passwordBackground.heightAnchor.constraint(equalToConstant: 130)
         ])
 
         let passwordLabel = UILabel()
@@ -131,8 +129,8 @@ class LogInViewController: UIViewController {
         NSLayoutConstraint.activate([
             passwordLabel.widthAnchor.constraint(lessThanOrEqualToConstant: 200),
             passwordLabel.heightAnchor.constraint(equalToConstant: 20),
-            passwordLabel.topAnchor.constraint(equalTo: passwordBackground.topAnchor, constant: 20),
-            passwordLabel.leadingAnchor.constraint(equalTo: passwordBackground.leadingAnchor, constant: 30)
+            passwordLabel.topAnchor.constraint(equalTo: passwordBackground.topAnchor, constant: 30),
+            passwordLabel.leadingAnchor.constraint(equalTo: passwordBackground.leadingAnchor, constant: 40)
         ])
         
         let passwordTextfield = UITextField()
@@ -157,7 +155,7 @@ class LogInViewController: UIViewController {
             bottomBackground.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             bottomBackground.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             bottomBackground.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            bottomBackground.heightAnchor.constraint(equalToConstant: 150)
+            bottomBackground.heightAnchor.constraint(equalToConstant: 130)
         ])
         
         let connectBtn = UIButton()
@@ -165,6 +163,7 @@ class LogInViewController: UIViewController {
         connectBtn.setTitle("Connect".uppercased(), for: .normal)
         connectBtn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         connectBtn.translatesAutoresizingMaskIntoConstraints = false
+        connectBtn.layer.cornerRadius = 5
         connectBtn.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(connectBtnPressed)))
         view.addSubview(connectBtn)
         NSLayoutConstraint.activate([
@@ -206,10 +205,6 @@ extension UIColor {
    }
 
    convenience init(rgb: Int) {
-       self.init(
-           red: (rgb >> 16) & 0xFF,
-           green: (rgb >> 8) & 0xFF,
-           blue: rgb & 0xFF
-       )
+       self.init(red: (rgb >> 16) & 0xFF, green: (rgb >> 8) & 0xFF, blue: rgb & 0xFF)
    }
 }
