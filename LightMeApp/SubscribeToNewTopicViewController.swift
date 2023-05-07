@@ -9,6 +9,10 @@ import UIKit
 
 class SubscribeToNewTopicViewController: UIViewController {
 
+    var callback: ((String?, String?)->Void)?
+    private let subscribeTextfield = UITextField()
+    private let publishTextfield = UITextField()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
@@ -46,7 +50,6 @@ class SubscribeToNewTopicViewController: UIViewController {
             subscribeLabel.heightAnchor.constraint(equalToConstant: 30)
         ])
 
-        let subscribeTextfield = UITextField()
         subscribeTextfield.backgroundColor = .white
         subscribeTextfield.translatesAutoresizingMaskIntoConstraints = false
         subscribeTextfield.layer.cornerRadius = 5
@@ -70,7 +73,6 @@ class SubscribeToNewTopicViewController: UIViewController {
             publishLabel.heightAnchor.constraint(equalToConstant: 30)
         ])
 
-        let publishTextfield = UITextField()
         publishTextfield.backgroundColor = .white
         publishTextfield.translatesAutoresizingMaskIntoConstraints = false
         publishTextfield.layer.cornerRadius = 5
@@ -100,6 +102,8 @@ class SubscribeToNewTopicViewController: UIViewController {
     }
 
     @objc func okPressed() {
+        guard subscribeTextfield.text != "" || publishTextfield.text != ""  else { return }
+        callback?(subscribeTextfield.text, publishTextfield.text)
         dismiss(animated: true)
     }
 }

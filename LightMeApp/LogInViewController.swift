@@ -9,6 +9,9 @@ import UIKit
 
 class LogInViewController: UIViewController {
 
+    private let usernameTextfield = UITextField()
+    private let passwordTextfield = UITextField()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -94,7 +97,6 @@ class LogInViewController: UIViewController {
             usernameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20)
         ])
         
-        let usernameTextfield = UITextField()
         usernameTextfield.translatesAutoresizingMaskIntoConstraints = false
         usernameTextfield.backgroundColor = .white
         usernameTextfield.layer.cornerRadius = 5
@@ -132,8 +134,7 @@ class LogInViewController: UIViewController {
             passwordLabel.topAnchor.constraint(equalTo: passwordBackground.topAnchor, constant: 30),
             passwordLabel.leadingAnchor.constraint(equalTo: passwordBackground.leadingAnchor, constant: 40)
         ])
-        
-        let passwordTextfield = UITextField()
+
         passwordTextfield.translatesAutoresizingMaskIntoConstraints = false
         passwordTextfield.backgroundColor = .white
         passwordTextfield.layer.cornerRadius = 5
@@ -189,9 +190,13 @@ class LogInViewController: UIViewController {
     }
     
     @objc func connectBtnPressed(_ sender: UIView) {
-        let vc = MainPageViewController()
-        vc.modalPresentationStyle = .overFullScreen
-        navigationController?.pushViewController(vc, animated: true)
+        if true /*FIXME: Add check for connectivity*/{
+            let vc = MainPageViewController()
+            vc.modalPresentationStyle = .overFullScreen
+            navigationController?.pushViewController(vc, animated: true)
+        } else {
+            //FIXME: Show error message
+        }
     }
 }
 

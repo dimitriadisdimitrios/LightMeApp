@@ -8,7 +8,12 @@
 import UIKit
 
 class MainPageViewController: UIViewController {
-    
+
+    private let temperatureLabel = UILabel()
+    private let humidityLabel = UILabel()
+    private let ledSwitch = UISwitch()
+    private let sendTextField = UITextField()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -79,7 +84,6 @@ class MainPageViewController: UIViewController {
             humidityIcon.heightAnchor.constraint(equalToConstant: 50)
         ])
 
-        let humidityLabel = UILabel()
         humidityLabel.translatesAutoresizingMaskIntoConstraints = false
         humidityLabel.text = "32 %"
         humidityLabel.font = UIFont.systemFont(ofSize: 30)
@@ -103,7 +107,6 @@ class MainPageViewController: UIViewController {
             temperatureIcon.heightAnchor.constraint(equalToConstant: 50)
         ])
 
-        let temperatureLabel = UILabel()
         temperatureLabel.translatesAutoresizingMaskIntoConstraints = false
         temperatureLabel.text = "23 °C"
         temperatureLabel.font = UIFont.systemFont(ofSize: 30)
@@ -171,7 +174,6 @@ class MainPageViewController: UIViewController {
             ledIcon.heightAnchor.constraint(equalToConstant: 60)
         ])
 
-        let ledSwitch = UISwitch()
         ledSwitch.translatesAutoresizingMaskIntoConstraints = false
         ledSwitch.transform = CGAffineTransformMakeScale(1.3, 1.3)
         view.addSubview(ledSwitch)
@@ -206,7 +208,6 @@ class MainPageViewController: UIViewController {
             sendTextIcon.heightAnchor.constraint(equalToConstant: 60)
         ])
 
-        let sendTextField = UITextField()
         sendTextField.translatesAutoresizingMaskIntoConstraints = false
         sendTextField.backgroundColor = .white
         sendTextField.text = "2"
@@ -241,6 +242,9 @@ class MainPageViewController: UIViewController {
 
     @objc func subscribeToNewTopicBtnPressed() {
         let vc = SubscribeToNewTopicViewController()
+        vc.callback = { subscribeText, publishText in
+            //FIXME: Add the process to subscribe / publish in topic
+        }
         vc.modalTransitionStyle = .crossDissolve
         present(vc, animated: true)
     }
