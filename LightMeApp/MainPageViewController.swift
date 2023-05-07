@@ -116,6 +116,36 @@ class MainPageViewController: UIViewController {
             temperatureLabel.trailingAnchor.constraint(equalTo: tempHumBackground.trailingAnchor, constant: -20)
         ])
 
+        //MARK: Button to add topic
+        let addBtnBackground = UIView()
+        addBtnBackground.backgroundColor = UIColor.init(rgb: 0x92bb45)
+        addBtnBackground.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(addBtnBackground)
+        NSLayoutConstraint.activate([
+            addBtnBackground.heightAnchor.constraint(equalToConstant: 80),
+            addBtnBackground.widthAnchor.constraint(equalToConstant: 80),
+            addBtnBackground.topAnchor.constraint(equalTo: topBackground.bottomAnchor, constant: -10),
+            addBtnBackground.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+        ])
+        addBtnBackground.layer.cornerRadius = 40
+        addBtnBackground.clipsToBounds = true
+
+        let addBtn = UILabel()
+        addBtn.text = "+"
+        addBtn.font = .systemFont(ofSize: 50)
+        addBtn.textColor = .white
+        addBtn.translatesAutoresizingMaskIntoConstraints = false
+        addBtn.textAlignment = .center
+        addBtn.isUserInteractionEnabled = true
+        addBtn.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(subscribeToNewTopicBtnPressed)))
+        view.addSubview(addBtn)
+        NSLayoutConstraint.activate([
+            addBtn.centerXAnchor.constraint(equalTo: addBtnBackground.centerXAnchor),
+            addBtn.centerYAnchor.constraint(equalTo: addBtnBackground.centerYAnchor),
+            addBtn.widthAnchor.constraint(equalToConstant: 80),
+            addBtn.heightAnchor.constraint(equalToConstant: 80)
+        ])
+
         //MARK: LED
         let ledBackground = UIImageView()
         ledBackground.image = UIImage(named: "attributesBackgroundBig")
@@ -207,5 +237,11 @@ class MainPageViewController: UIViewController {
 
     @objc func sendTextBtnPressed() {
         print("Add process ")
+    }
+
+    @objc func subscribeToNewTopicBtnPressed() {
+        let vc = SubscribeToNewTopicViewController()
+        vc.modalTransitionStyle = .crossDissolve
+        present(vc, animated: true)
     }
 }

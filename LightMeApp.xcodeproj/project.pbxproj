@@ -14,6 +14,7 @@
 		AEF4F36C2A03915D00869FA7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AEF4F36B2A03915D00869FA7 /* Assets.xcassets */; };
 		AEF4F36F2A03915D00869FA7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEF4F36D2A03915D00869FA7 /* LaunchScreen.storyboard */; };
 		AEF4F3772A03AC8A00869FA7 /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF4F3762A03AC8A00869FA7 /* MainPageViewController.swift */; };
+		E8E664E42A08256D00750DC1 /* SubscribeToNewTopicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E664E32A08256D00750DC1 /* SubscribeToNewTopicViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		AEF4F36E2A03915D00869FA7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AEF4F3702A03915D00869FA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AEF4F3762A03AC8A00869FA7 /* MainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
+		E8E664E32A08256D00750DC1 /* SubscribeToNewTopicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscribeToNewTopicViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				AEF4F3622A03915C00869FA7 /* AppDelegate.swift */,
 				AEF4F3642A03915C00869FA7 /* SceneDelegate.swift */,
 				AEF4F3662A03915C00869FA7 /* LogInViewController.swift */,
+				E8E664E32A08256D00750DC1 /* SubscribeToNewTopicViewController.swift */,
 				AEF4F3762A03AC8A00869FA7 /* MainPageViewController.swift */,
 				AEF4F3682A03915C00869FA7 /* Main.storyboard */,
 				AEF4F36B2A03915D00869FA7 /* Assets.xcassets */,
@@ -145,6 +148,7 @@
 				AEF4F3672A03915C00869FA7 /* LogInViewController.swift in Sources */,
 				AEF4F3632A03915C00869FA7 /* AppDelegate.swift in Sources */,
 				AEF4F3652A03915C00869FA7 /* SceneDelegate.swift in Sources */,
+				E8E664E42A08256D00750DC1 /* SubscribeToNewTopicViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
