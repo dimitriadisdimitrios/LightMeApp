@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CocoaMQTT
 
 class LogInViewController: UIViewController {
 
@@ -13,6 +14,10 @@ class LogInViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         setup()
+        MqttManager.shared.connect(username: "dimitris", password: "20Abstergo12", delegate: self)
+        MqttManager.shared.subscribe(to: "testtopic2/3")
+        MqttManager.shared.publish(to: "testtopic2/3", with: "your-message")
+
     }
     
     private func setup() {
@@ -193,6 +198,92 @@ class LogInViewController: UIViewController {
         vc.modalPresentationStyle = .overFullScreen
         navigationController?.pushViewController(vc, animated: true)
     }
+}
+
+extension LogInViewController: CocoaMQTT5Delegate {
+    func mqtt5(_ mqtt5: CocoaMQTT5, didConnectAck ack: CocoaMQTTCONNACKReasonCode, connAckData: MqttDecodeConnAck?) {
+        print("ASD - 1")
+    }
+
+    func mqtt5(_ mqtt5: CocoaMQTT5, didPublishMessage message: CocoaMQTT5Message, id: UInt16) {
+        print("ASD - 2")
+    }
+
+    func mqtt5(_ mqtt5: CocoaMQTT5, didPublishAck id: UInt16, pubAckData: MqttDecodePubAck?) {
+        print("ASD - 3")
+    }
+
+    func mqtt5(_ mqtt5: CocoaMQTT5, didPublishRec id: UInt16, pubRecData: MqttDecodePubRec?) {
+        print("ASD - 4")
+    }
+
+    func mqtt5(_ mqtt5: CocoaMQTT5, didReceiveMessage message: CocoaMQTT5Message, id: UInt16, publishData: MqttDecodePublish?) {
+        print("ASD - 5")
+    }
+
+    func mqtt5(_ mqtt5: CocoaMQTT5, didSubscribeTopics success: NSDictionary, failed: [String], subAckData: MqttDecodeSubAck?) {
+        print("ASD - 6")
+    }
+
+    func mqtt5(_ mqtt5: CocoaMQTT5, didUnsubscribeTopics topics: [String], UnsubAckData: MqttDecodeUnsubAck?) {
+        print("ASD - 7")
+    }
+
+    func mqtt5(_ mqtt5: CocoaMQTT5, didReceiveDisconnectReasonCode reasonCode: CocoaMQTTDISCONNECTReasonCode) {
+        print("ASD - 8")
+    }
+
+    func mqtt5(_ mqtt5: CocoaMQTT5, didReceiveAuthReasonCode reasonCode: CocoaMQTTAUTHReasonCode) {
+        print("ASD - 9")
+    }
+
+    func mqtt5DidPing(_ mqtt5: CocoaMQTT5) {
+        print("ASD - 10")
+    }
+
+    func mqtt5DidReceivePong(_ mqtt5: CocoaMQTT5) {
+        print("ASD - 11")
+    }
+
+    func mqtt5DidDisconnect(_ mqtt5: CocoaMQTT5, withError err: Error?) {
+        print("ASD - 12")
+    }
+
+//    func mqtt(_ mqtt: CocoaMQTT, didConnectAck ack: CocoaMQTTConnAck) {
+//        print("ASD - 1")
+//    }
+//
+//    func mqtt(_ mqtt: CocoaMQTT, didPublishMessage message: CocoaMQTTMessage, id: UInt16) {
+//        print("ASD - 2")
+//    }
+//
+//    func mqtt(_ mqtt: CocoaMQTT, didPublishAck id: UInt16) {
+//        print("ASD - 3")
+//    }
+//
+//    func mqtt(_ mqtt: CocoaMQTT, didReceiveMessage message: CocoaMQTTMessage, id: UInt16) {
+//        print("ASD - 4")
+//    }
+//
+//    func mqtt(_ mqtt: CocoaMQTT, didSubscribeTopics success: NSDictionary, failed: [String]) {
+//        print("ASD - 5")
+//    }
+//
+//    func mqtt(_ mqtt: CocoaMQTT, didUnsubscribeTopics topics: [String]) {
+//        print("ASD - 6")
+//    }
+//
+//    func mqttDidPing(_ mqtt: CocoaMQTT) {
+//        print("ASD - 7")
+//    }
+//
+//    func mqttDidReceivePong(_ mqtt: CocoaMQTT) {
+//        print("ASD - 8")
+//    }
+//
+//    func mqttDidDisconnect(_ mqtt: CocoaMQTT, withError err: Error?) {
+//        print("ASD - 9")
+//    }
 }
 
 extension UIColor {

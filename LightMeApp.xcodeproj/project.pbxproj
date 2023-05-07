@@ -14,9 +14,13 @@
 		AEF4F36C2A03915D00869FA7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AEF4F36B2A03915D00869FA7 /* Assets.xcassets */; };
 		AEF4F36F2A03915D00869FA7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEF4F36D2A03915D00869FA7 /* LaunchScreen.storyboard */; };
 		AEF4F3772A03AC8A00869FA7 /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF4F3762A03AC8A00869FA7 /* MainPageViewController.swift */; };
+		D2162404BD6D3BEA1820B7EC /* Pods_LightMeApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABA472C7F6F9DAFC7B76A54E /* Pods_LightMeApp.framework */; };
+		E8D3AEC62A0623B300FAB82C /* MqttManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8D3AEC52A0623B300FAB82C /* MqttManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3F601903B83AE1E178F2F3FF /* Pods-LightMeApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LightMeApp.debug.xcconfig"; path = "Target Support Files/Pods-LightMeApp/Pods-LightMeApp.debug.xcconfig"; sourceTree = "<group>"; };
+		ABA472C7F6F9DAFC7B76A54E /* Pods_LightMeApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LightMeApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEF4F35F2A03915C00869FA7 /* LightMeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LightMeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEF4F3622A03915C00869FA7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AEF4F3642A03915C00869FA7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -26,6 +30,8 @@
 		AEF4F36E2A03915D00869FA7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AEF4F3702A03915D00869FA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AEF4F3762A03AC8A00869FA7 /* MainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
+		CA6D8EE8FB95A298E8C2669B /* Pods-LightMeApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LightMeApp.release.xcconfig"; path = "Target Support Files/Pods-LightMeApp/Pods-LightMeApp.release.xcconfig"; sourceTree = "<group>"; };
+		E8D3AEC52A0623B300FAB82C /* MqttManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MqttManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +39,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2162404BD6D3BEA1820B7EC /* Pods_LightMeApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -44,6 +51,8 @@
 			children = (
 				AEF4F3612A03915C00869FA7 /* LightMeApp */,
 				AEF4F3602A03915C00869FA7 /* Products */,
+				D615E1938A421E6C39BBCD19 /* Pods */,
+				BDF6AA84179A25C98A801EAE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -66,8 +75,26 @@
 				AEF4F36B2A03915D00869FA7 /* Assets.xcassets */,
 				AEF4F36D2A03915D00869FA7 /* LaunchScreen.storyboard */,
 				AEF4F3702A03915D00869FA7 /* Info.plist */,
+				E8D3AEC52A0623B300FAB82C /* MqttManager.swift */,
 			);
 			path = LightMeApp;
+			sourceTree = "<group>";
+		};
+		BDF6AA84179A25C98A801EAE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ABA472C7F6F9DAFC7B76A54E /* Pods_LightMeApp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D615E1938A421E6C39BBCD19 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3F601903B83AE1E178F2F3FF /* Pods-LightMeApp.debug.xcconfig */,
+				CA6D8EE8FB95A298E8C2669B /* Pods-LightMeApp.release.xcconfig */,
+			);
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -77,9 +104,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AEF4F3732A03915D00869FA7 /* Build configuration list for PBXNativeTarget "LightMeApp" */;
 			buildPhases = (
+				161A163298063C8E558C8D84 /* [CP] Check Pods Manifest.lock */,
 				AEF4F35B2A03915C00869FA7 /* Sources */,
 				AEF4F35C2A03915C00869FA7 /* Frameworks */,
 				AEF4F35D2A03915C00869FA7 /* Resources */,
+				25FD1BEF8967C9F42EFECB1E /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -136,6 +165,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		161A163298063C8E558C8D84 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LightMeApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		25FD1BEF8967C9F42EFECB1E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LightMeApp/Pods-LightMeApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LightMeApp/Pods-LightMeApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LightMeApp/Pods-LightMeApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		AEF4F35B2A03915C00869FA7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -145,6 +216,7 @@
 				AEF4F3672A03915C00869FA7 /* LogInViewController.swift in Sources */,
 				AEF4F3632A03915C00869FA7 /* AppDelegate.swift in Sources */,
 				AEF4F3652A03915C00869FA7 /* SceneDelegate.swift in Sources */,
+				E8D3AEC62A0623B300FAB82C /* MqttManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,12 +358,13 @@
 		};
 		AEF4F3742A03915D00869FA7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3F601903B83AE1E178F2F3FF /* Pods-LightMeApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7KR5P9KV48;
+				DEVELOPMENT_TEAM = 693WG73N65;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LightMeApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -314,12 +387,13 @@
 		};
 		AEF4F3752A03915D00869FA7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CA6D8EE8FB95A298E8C2669B /* Pods-LightMeApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7KR5P9KV48;
+				DEVELOPMENT_TEAM = 693WG73N65;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LightMeApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
