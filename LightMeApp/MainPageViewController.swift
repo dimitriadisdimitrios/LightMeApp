@@ -17,7 +17,7 @@ class MainPageViewController: UIViewController {
     
     private func setup() {
         view.backgroundColor = .gray
-        //        navigationItem.hidesBackButton = true
+        navigationItem.hidesBackButton = true
         
         let topBackground = UIImageView()
         topBackground.image = UIImage(named: "topBackground")
@@ -54,75 +54,158 @@ class MainPageViewController: UIViewController {
             mobileIconImage.heightAnchor.constraint(equalToConstant: 50),
             mobileIconImage.widthAnchor.constraint(equalToConstant: 60)
         ])
-        
-        let usernameBackground = UIImageView()
-        usernameBackground.image = UIImage(named: "attributesBackground")
-        usernameBackground.contentMode = .scaleToFill
-        usernameBackground.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(usernameBackground)
+
+        //MARK: Temperature - Humidity
+        let tempHumBackground = UIImageView()
+        tempHumBackground.image = UIImage(named: "attributesBackgroundBig")
+        tempHumBackground.contentMode = .scaleToFill
+        tempHumBackground.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(tempHumBackground)
         NSLayoutConstraint.activate([
-            usernameBackground.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            usernameBackground.bottomAnchor.constraint(equalTo: view.centerYAnchor, constant: -30),
-            usernameBackground.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -140),
-            usernameBackground.heightAnchor.constraint(equalToConstant: 130)
-        ])
-        
-       
-        
-        let passwordBackground = UIImageView()
-        passwordBackground.image = UIImage(named: "attributesBackground")
-        passwordBackground.contentMode = .scaleToFill
-        passwordBackground.transform = passwordBackground.transform.rotated(by: .pi)
-        passwordBackground.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(passwordBackground)
-        NSLayoutConstraint.activate([
-            passwordBackground.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            passwordBackground.topAnchor.constraint(equalTo: view.centerYAnchor, constant: 30),
-            passwordBackground.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 140),
-            passwordBackground.heightAnchor.constraint(equalToConstant: 130)
+            tempHumBackground.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tempHumBackground.topAnchor.constraint(equalTo: topBackground.bottomAnchor, constant: 30),
+            tempHumBackground.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -140),
+            tempHumBackground.heightAnchor.constraint(equalToConstant: 170)
         ])
 
-        
-        let bottomBackground = UIImageView()
-        bottomBackground.transform = bottomBackground.transform.rotated(by: .pi)
-        bottomBackground.image = UIImage(named: "topBackground")
-        bottomBackground.contentMode = .scaleAspectFill
-        bottomBackground.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(bottomBackground)
+        let humidityIcon = UIImageView()
+        humidityIcon.translatesAutoresizingMaskIntoConstraints = false
+        humidityIcon.image = UIImage(named: "icon_droplet")
+        view.addSubview(humidityIcon)
         NSLayoutConstraint.activate([
-            bottomBackground.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            bottomBackground.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            bottomBackground.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            bottomBackground.heightAnchor.constraint(equalToConstant: 130)
+            humidityIcon.bottomAnchor.constraint(equalTo: tempHumBackground.centerYAnchor, constant: -10),
+            humidityIcon.leadingAnchor.constraint(equalTo: tempHumBackground.leadingAnchor, constant: 10),
+            humidityIcon.widthAnchor.constraint(equalToConstant: 50),
+            humidityIcon.heightAnchor.constraint(equalToConstant: 50)
         ])
-        
-        let connectBtn = UIButton()
-        connectBtn.backgroundColor = UIColor.init(rgb: 0x92bb45)
-        connectBtn.setTitle("Connect".uppercased(), for: .normal)
-        connectBtn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
-        connectBtn.translatesAutoresizingMaskIntoConstraints = false
-        connectBtn.layer.cornerRadius = 5
-//        connectBtn.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(connectBtnPressed)))
-        view.addSubview(connectBtn)
+
+        let humidityLabel = UILabel()
+        humidityLabel.translatesAutoresizingMaskIntoConstraints = false
+        humidityLabel.text = "32 %"
+        humidityLabel.font = UIFont.systemFont(ofSize: 30)
+        humidityLabel.textColor = .white
+        view.addSubview(humidityLabel)
         NSLayoutConstraint.activate([
-            connectBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            connectBtn.heightAnchor.constraint(equalToConstant: 40),
-            connectBtn.widthAnchor.constraint(equalToConstant: 100),
-            connectBtn.topAnchor.constraint(equalTo: bottomBackground.topAnchor, constant: -60)
+            humidityLabel.leadingAnchor.constraint(equalTo: humidityIcon.trailingAnchor, constant: 20),
+            humidityLabel.topAnchor.constraint(equalTo: humidityIcon.topAnchor),
+            humidityLabel.bottomAnchor.constraint(equalTo: humidityIcon.bottomAnchor),
+            humidityLabel.trailingAnchor.constraint(equalTo: tempHumBackground.trailingAnchor, constant: -20)
         ])
-        
-        let lightMeAppLabel = UILabel()
-        lightMeAppLabel.text = "LIGHT ME APP"
-        lightMeAppLabel.textColor = .white
-        lightMeAppLabel.font = UIFont.systemFont(ofSize: 24)
-        lightMeAppLabel.textAlignment = .center
-        lightMeAppLabel.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(lightMeAppLabel)
+
+        let temperatureIcon = UIImageView()
+        temperatureIcon.translatesAutoresizingMaskIntoConstraints = false
+        temperatureIcon.image = UIImage(named: "icon_temperature")
+        view.addSubview(temperatureIcon)
         NSLayoutConstraint.activate([
-            lightMeAppLabel.widthAnchor.constraint(lessThanOrEqualToConstant: 200),
-            lightMeAppLabel.heightAnchor.constraint(equalToConstant: 40),
-            lightMeAppLabel.centerYAnchor.constraint(equalTo: bottomBackground.centerYAnchor),
-            lightMeAppLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            temperatureIcon.topAnchor.constraint(equalTo: tempHumBackground.centerYAnchor, constant: 10),
+            temperatureIcon.leadingAnchor.constraint(equalTo: tempHumBackground.leadingAnchor, constant: 10),
+            temperatureIcon.widthAnchor.constraint(equalToConstant: 50),
+            temperatureIcon.heightAnchor.constraint(equalToConstant: 50)
         ])
+
+        let temperatureLabel = UILabel()
+        temperatureLabel.translatesAutoresizingMaskIntoConstraints = false
+        temperatureLabel.text = "23 °C"
+        temperatureLabel.font = UIFont.systemFont(ofSize: 30)
+        temperatureLabel.textColor = .white
+        view.addSubview(temperatureLabel)
+        NSLayoutConstraint.activate([
+            temperatureLabel.leadingAnchor.constraint(equalTo: temperatureIcon.trailingAnchor, constant: 20),
+            temperatureLabel.topAnchor.constraint(equalTo: temperatureIcon.topAnchor),
+            temperatureLabel.bottomAnchor.constraint(equalTo: temperatureIcon.bottomAnchor),
+            temperatureLabel.trailingAnchor.constraint(equalTo: tempHumBackground.trailingAnchor, constant: -20)
+        ])
+
+        //MARK: LED
+        let ledBackground = UIImageView()
+        ledBackground.image = UIImage(named: "attributesBackgroundBig")
+        ledBackground.contentMode = .scaleToFill
+        ledBackground.transform = ledBackground.transform.rotated(by: .pi)
+        ledBackground.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(ledBackground)
+        NSLayoutConstraint.activate([
+            ledBackground.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            ledBackground.topAnchor.constraint(equalTo: tempHumBackground.bottomAnchor, constant: 30),
+            ledBackground.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 140),
+            ledBackground.heightAnchor.constraint(equalToConstant: 170)
+        ])
+
+        let ledIcon = UIImageView()
+        ledIcon.translatesAutoresizingMaskIntoConstraints = false
+        ledIcon.image = UIImage(named: "icon_light")
+        view.addSubview(ledIcon)
+        NSLayoutConstraint.activate([
+            ledIcon.centerYAnchor.constraint(equalTo: ledBackground.centerYAnchor),
+            ledIcon.leadingAnchor.constraint(equalTo: ledBackground.leadingAnchor, constant: 50),
+            ledIcon.widthAnchor.constraint(equalToConstant: 60),
+            ledIcon.heightAnchor.constraint(equalToConstant: 60)
+        ])
+
+        let ledSwitch = UISwitch()
+        ledSwitch.translatesAutoresizingMaskIntoConstraints = false
+        ledSwitch.transform = CGAffineTransformMakeScale(1.3, 1.3)
+        view.addSubview(ledSwitch)
+        NSLayoutConstraint.activate([
+            ledSwitch.centerYAnchor.constraint(equalTo: ledBackground.centerYAnchor),
+            ledSwitch.widthAnchor.constraint(equalToConstant: 60),
+            ledSwitch.heightAnchor.constraint(lessThanOrEqualToConstant: 60),
+            ledSwitch.leadingAnchor.constraint(equalTo: ledIcon.trailingAnchor, constant: 40)
+        ])
+
+        //MARK: Send text
+        let sendTextBackground = UIImageView()
+        sendTextBackground.image = UIImage(named: "attributesBackgroundBig")
+        sendTextBackground.contentMode = .scaleToFill
+        sendTextBackground.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(sendTextBackground)
+        NSLayoutConstraint.activate([
+            sendTextBackground.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            sendTextBackground.topAnchor.constraint(equalTo: ledBackground.bottomAnchor, constant: 30),
+            sendTextBackground.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -140),
+            sendTextBackground.heightAnchor.constraint(equalToConstant: 170)
+        ])
+
+        let sendTextIcon = UIImageView()
+        sendTextIcon.translatesAutoresizingMaskIntoConstraints = false
+        sendTextIcon.image = UIImage(named: "icon_broadcast")
+        view.addSubview(sendTextIcon)
+        NSLayoutConstraint.activate([
+            sendTextIcon.centerYAnchor.constraint(equalTo: sendTextBackground.centerYAnchor),
+            sendTextIcon.leadingAnchor.constraint(equalTo: sendTextBackground.leadingAnchor, constant: 10),
+            sendTextIcon.widthAnchor.constraint(equalToConstant: 60),
+            sendTextIcon.heightAnchor.constraint(equalToConstant: 60)
+        ])
+
+        let sendTextField = UITextField()
+        sendTextField.translatesAutoresizingMaskIntoConstraints = false
+        sendTextField.backgroundColor = .white
+        sendTextField.text = "2"
+        sendTextField.textAlignment = .center
+        view.addSubview(sendTextField)
+        NSLayoutConstraint.activate([
+            sendTextField.leadingAnchor.constraint(equalTo: sendTextIcon.trailingAnchor, constant: 10),
+            sendTextField.centerYAnchor.constraint(equalTo: sendTextBackground.centerYAnchor),
+            sendTextField.heightAnchor.constraint(equalToConstant: 40),
+            sendTextField.widthAnchor.constraint(equalToConstant: 50)
+        ])
+
+        let sendBtn = UIButton()
+        sendBtn.backgroundColor = UIColor.init(rgb: 0x92bb45)
+        sendBtn.setTitle("Send".uppercased(), for: .normal)
+        sendBtn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        sendBtn.translatesAutoresizingMaskIntoConstraints = false
+        sendBtn.layer.cornerRadius = 5
+        sendBtn.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(sendTextBtnPressed)))
+        view.addSubview(sendBtn)
+        NSLayoutConstraint.activate([
+            sendBtn.leadingAnchor.constraint(equalTo: sendTextField.trailingAnchor, constant: 10),
+            sendBtn.heightAnchor.constraint(equalToConstant: 40),
+            sendBtn.widthAnchor.constraint(equalToConstant: 80),
+            sendBtn.centerYAnchor.constraint(equalTo: sendTextBackground.centerYAnchor)
+        ])
+    }
+
+    @objc func sendTextBtnPressed() {
+        print("Add process ")
     }
 }
