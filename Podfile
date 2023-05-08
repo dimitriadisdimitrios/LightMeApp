@@ -7,6 +7,7 @@ target 'LightMeApp' do
 
   # Pods for LightMeApp
   pod 'CocoaMQTT/WebSockets'
+  pod 'CocoaMQTT'
 end
 
 post_install do |installer|

@@ -14,10 +14,9 @@ class LogInViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         setup()
+//        var mqtt = CocoaMQTT5(clientID: "CocoaMQTT-" + String(ProcessInfo().processIdentifier), host: "mqtt-dashboard.com", port: 8884)
         MqttManager.shared.connect(username: "test123", password: "Test1234", delegate: self)
-//        MqttManager.shared.subscribe(to: "testtopic2/3")
-//        MqttManager.shared.publish(to: "testtopic2/3", with: "your-message")
-
+        
     }
     
     private func setup() {
@@ -194,9 +193,11 @@ class LogInViewController: UIViewController {
     }
     
     @objc func connectBtnPressed(_ sender: UIView) {
-        let vc = MainPageViewController()
-        vc.modalPresentationStyle = .overFullScreen
-        navigationController?.pushViewController(vc, animated: true)
+        MqttManager.shared.subscribe(to: "testtopic2/3")
+
+//        let vc = MainPageViewController()
+//        vc.modalPresentationStyle = .overFullScreen
+//        navigationController?.pushViewController(vc, animated: true)
     }
 }
 

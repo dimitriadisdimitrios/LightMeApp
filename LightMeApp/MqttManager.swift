@@ -13,17 +13,25 @@ class MqttManager {
 
     // MQTT client
 //    var mqtt: CocoaMQTT5? = nil
-    var mqtt = CocoaMQTT5(clientID: "CocoaMQTT-" + String(ProcessInfo().processIdentifier), host: "c7f60f3638c948c6ab3579e64858a97c.s2.eu.hivemq.cloud", port: 8884)
+    var mqtt = CocoaMQTT5(clientID: "CocoaMQTT-" + String(ProcessInfo().processIdentifier), host: "mqtt-dashboard.com", port: 8883)
 
     // Connect to MQTT broker
     func connect(username: String, password: String, delegate: CocoaMQTT5Delegate) {
-        mqtt.username = username
-        mqtt.password = password
+        mqtt.username = ""//username
+        mqtt.password = ""//password
         mqtt.delegate = delegate
         mqtt.cleanSession = true
         mqtt.keepAlive = 60
         mqtt.enableSSL = true
+//        mqtt.autoReconnect = true
         mqtt.logLevel = .debug
+//        mqtt.sslSettings = [
+//            GCDAsyncSocketManuallyEvaluateTrust: NSNumber(booleanLiteral: true),
+//            GCDAsyncSocketUseCFStreamForTLS: NSNumber(booleanLiteral: false),
+//            kCFStreamSSLPeerName as String: "" as NSString,
+//            GCDAsyncSocketSSLProtocolVersionMin: NSNumber(integerLiteral: Int(SSLProtocol.tlsProtocol1.rawValue)),
+//            GCDAsyncSocketSSLProtocolVersionMax: NSNumber(integerLiteral: Int(SSLProtocol.tlsProtocol12.rawValue)),
+//        ]
         let asd = mqtt.connect()
         print(asd)
 
@@ -51,6 +59,8 @@ class MqttManager {
 
     // Publish a message to a topic
     func publish(to topic: String, with message: String) {
+//        let mqttMessage = CocoaMQTTMessage(topic: topic, string: message)
+//        mqtt.publish(mqttMessage)
         let mqttMessage = CocoaMQTT5Message(topic: topic, string: message)
         mqtt.publish(mqttMessage, properties: MqttPublishProperties())
     }

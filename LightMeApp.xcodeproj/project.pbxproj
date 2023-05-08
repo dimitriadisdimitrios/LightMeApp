@@ -364,8 +364,18 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 693WG73N65;
+				DEVELOPMENT_TEAM = 7KR5P9KV48;
 				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/CocoaMQTT/CocoaMQTT.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Moscapsule/Moscapsule.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MqttCocoaAsyncSocket/MqttCocoaAsyncSocket.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Starscream/Starscream.framework/Headers\"",
+					"\"${PODS_ROOT}/Headers/Public/OpenSSL-Universal\"",
+					/usr/local/opt/openssl/lib,
+					/usr/local/opt/openssl/include,
+				);
 				INFOPLIST_FILE = LightMeApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -393,8 +403,18 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 693WG73N65;
+				DEVELOPMENT_TEAM = 7KR5P9KV48;
 				GENERATE_INFOPLIST_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/CocoaMQTT/CocoaMQTT.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Moscapsule/Moscapsule.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MqttCocoaAsyncSocket/MqttCocoaAsyncSocket.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Starscream/Starscream.framework/Headers\"",
+					"\"${PODS_ROOT}/Headers/Public/OpenSSL-Universal\"",
+					/usr/local/opt/openssl/lib,
+					/usr/local/opt/openssl/include,
+				);
 				INFOPLIST_FILE = LightMeApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
