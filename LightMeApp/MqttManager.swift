@@ -6,7 +6,6 @@
 //
 
 import CocoaMQTT
-import SwiftMQTT
 
 class MqttManager {
 
@@ -14,13 +13,15 @@ class MqttManager {
 
     // MQTT client
 //    var mqtt: CocoaMQTT5? = nil
-    var mqtt = CocoaMQTT5(clientID: "CocoaMQTT-" + String(ProcessInfo().processIdentifier), host: "3f4916e4c8eb4e8799278c6fe5e3aee2.s2.eu.hivemq.cloud", port: 8883)
+    var mqtt = CocoaMQTT5(clientID: "CocoaMQTT-" + String(ProcessInfo().processIdentifier), host: "c7f60f3638c948c6ab3579e64858a97c.s2.eu.hivemq.cloud", port: 8884)
 
     // Connect to MQTT broker
     func connect(username: String, password: String, delegate: CocoaMQTT5Delegate) {
         mqtt.username = username
         mqtt.password = password
         mqtt.delegate = delegate
+        mqtt.cleanSession = true
+        mqtt.keepAlive = 60
         mqtt.enableSSL = true
         mqtt.logLevel = .debug
         let asd = mqtt.connect()

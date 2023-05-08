@@ -14,9 +14,9 @@ class LogInViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         setup()
-        MqttManager.shared.connect(username: "dimitris", password: "20Abstergo12", delegate: self)
-        MqttManager.shared.subscribe(to: "testtopic2/3")
-        MqttManager.shared.publish(to: "testtopic2/3", with: "your-message")
+        MqttManager.shared.connect(username: "test123", password: "Test1234", delegate: self)
+//        MqttManager.shared.subscribe(to: "testtopic2/3")
+//        MqttManager.shared.publish(to: "testtopic2/3", with: "your-message")
 
     }
     
