@@ -247,7 +247,7 @@ extension LogInViewController: CocoaMQTT5Delegate {
     }
 
     func mqtt5DidDisconnect(_ mqtt5: CocoaMQTT5, withError err: Error?) {
-        print("ASD - 12")
+        print("ASD - 12 \(err?.localizedDescription)")
     }
 
 //    func mqtt(_ mqtt: CocoaMQTT, didConnectAck ack: CocoaMQTTConnAck) {
