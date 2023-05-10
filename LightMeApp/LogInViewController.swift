@@ -14,9 +14,6 @@ class LogInViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         setup()
-//        var mqtt = CocoaMQTT5(clientID: "CocoaMQTT-" + String(ProcessInfo().processIdentifier), host: "mqtt-dashboard.com", port: 8884)
-        MqttManager.shared.connect(username: "test123", password: "Test1234", delegate: self)
-        
     }
     
     private func setup() {
@@ -193,17 +190,26 @@ class LogInViewController: UIViewController {
     }
     
     @objc func connectBtnPressed(_ sender: UIView) {
-        MqttManager.shared.subscribe(to: "testtopic2/3")
-
-//        let vc = MainPageViewController()
-//        vc.modalPresentationStyle = .overFullScreen
-//        navigationController?.pushViewController(vc, animated: true)
+        MqttManager.shared.connect(username: "", password: "", delegate: self)
+//        MqttManager.shared.subscribe(to: "testtopic2/3")
     }
 }
 
 extension LogInViewController: CocoaMQTT5Delegate {
     func mqtt5(_ mqtt5: CocoaMQTT5, didConnectAck ack: CocoaMQTTCONNACKReasonCode, connAckData: MqttDecodeConnAck?) {
-        print("ASD - 1")
+        if ack == .success {
+            print("Success - on connection")
+            let vc = MainPageViewController()
+            vc.modalPresentationStyle = .overFullScreen
+            navigationController?.pushViewController(vc, animated: true)
+        } else {
+            MqttManager.shared.mqtt.disconnect()
+            print("Failure - on connection")
+            let failureAlertDialog = UIAlertController(title: "Error", message: "Failure during connection attempt", preferredStyle: .alert)
+            let okBtn = UIAlertAction(title: "ok ", style: .default)
+            failureAlertDialog.addAction(okBtn)
+            present(failureAlertDialog, animated: true)
+        }
     }
 
     func mqtt5(_ mqtt5: CocoaMQTT5, didPublishMessage message: CocoaMQTT5Message, id: UInt16) {
@@ -247,44 +253,8 @@ extension LogInViewController: CocoaMQTT5Delegate {
     }
 
     func mqtt5DidDisconnect(_ mqtt5: CocoaMQTT5, withError err: Error?) {
-        print("ASD - 12 \(err?.localizedDescription)")
+        print("ASD - 12 \(String(describing: err?.localizedDescription))")
     }
-
-//    func mqtt(_ mqtt: CocoaMQTT, didConnectAck ack: CocoaMQTTConnAck) {
-//        print("ASD - 1")
-//    }
-//
-//    func mqtt(_ mqtt: CocoaMQTT, didPublishMessage message: CocoaMQTTMessage, id: UInt16) {
-//        print("ASD - 2")
-//    }
-//
-//    func mqtt(_ mqtt: CocoaMQTT, didPublishAck id: UInt16) {
-//        print("ASD - 3")
-//    }
-//
-//    func mqtt(_ mqtt: CocoaMQTT, didReceiveMessage message: CocoaMQTTMessage, id: UInt16) {
-//        print("ASD - 4")
-//    }
-//
-//    func mqtt(_ mqtt: CocoaMQTT, didSubscribeTopics success: NSDictionary, failed: [String]) {
-//        print("ASD - 5")
-//    }
-//
-//    func mqtt(_ mqtt: CocoaMQTT, didUnsubscribeTopics topics: [String]) {
-//        print("ASD - 6")
-//    }
-//
-//    func mqttDidPing(_ mqtt: CocoaMQTT) {
-//        print("ASD - 7")
-//    }
-//
-//    func mqttDidReceivePong(_ mqtt: CocoaMQTT) {
-//        print("ASD - 8")
-//    }
-//
-//    func mqttDidDisconnect(_ mqtt: CocoaMQTT, withError err: Error?) {
-//        print("ASD - 9")
-//    }
 }
 
 extension UIColor {
