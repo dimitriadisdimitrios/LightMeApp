@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+protocol ReceiveMsgProtocol {
+    func didReceiveMessage(topic: String , message: String?)
+}

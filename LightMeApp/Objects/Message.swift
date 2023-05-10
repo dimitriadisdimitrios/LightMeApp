@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+struct Message: Codable {
+    let deviceId: String
+    let siteId: String
+    let humidity: Int
+    let temperature: Double
+}

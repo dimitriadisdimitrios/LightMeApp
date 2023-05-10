@@ -12,6 +12,8 @@ class LogInViewController: UIViewController {
 
     private let usernameTextfield = UITextField()
     private let passwordTextfield = UITextField()
+    
+    var receiveProtocol: ReceiveMsgProtocol?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -191,8 +193,7 @@ class LogInViewController: UIViewController {
     }
     
     @objc func connectBtnPressed(_ sender: UIView) {
-        MqttManager.shared.connect(username: "", password: "", delegate: self)
-//        MqttManager.shared.subscribe(to: "testtopic2/3")
+        MqttManager.shared.connect(username: usernameTextfield.text ?? "", password: passwordTextfield.text ?? "", delegate: self)
     }
 }
 
@@ -201,6 +202,7 @@ extension LogInViewController: CocoaMQTT5Delegate {
         if ack == .success {
             print("Success - on connection")
             let vc = MainPageViewController()
+            receiveProtocol = vc
             vc.modalPresentationStyle = .overFullScreen
             navigationController?.pushViewController(vc, animated: true)
         } else {
@@ -226,7 +228,7 @@ extension LogInViewController: CocoaMQTT5Delegate {
     }
 
     func mqtt5(_ mqtt5: CocoaMQTT5, didReceiveMessage message: CocoaMQTT5Message, id: UInt16, publishData: MqttDecodePublish?) {
-        print("ASD - 5")
+        receiveProtocol?.didReceiveMessage(topic: message.topic, message: message.string)
     }
 
     func mqtt5(_ mqtt5: CocoaMQTT5, didSubscribeTopics success: NSDictionary, failed: [String], subAckData: MqttDecodeSubAck?) {
@@ -254,20 +256,7 @@ extension LogInViewController: CocoaMQTT5Delegate {
     }
 
     func mqtt5DidDisconnect(_ mqtt5: CocoaMQTT5, withError err: Error?) {
+        MqttManager.shared.mqtt.disconnect()
         print("ASD - 12 \(String(describing: err?.localizedDescription))")
     }
-}
-
-extension UIColor {
-   convenience init(red: Int, green: Int, blue: Int) {
-       assert(red >= 0 && red <= 255, "Invalid red component")
-       assert(green >= 0 && green <= 255, "Invalid green component")
-       assert(blue >= 0 && blue <= 255, "Invalid blue component")
-
-       self.init(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: 1.0)
-   }
-
-   convenience init(rgb: Int) {
-       self.init(red: (rgb >> 16) & 0xFF, green: (rgb >> 8) & 0xFF, blue: rgb & 0xFF)
-   }
 }

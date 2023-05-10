@@ -6,14 +6,15 @@
 //
 
 import UIKit
+import CocoaMQTT
 
 class MainPageViewController: UIViewController {
-
+        
     private let temperatureLabel = UILabel()
     private let humidityLabel = UILabel()
     private let ledSwitch = UISwitch()
     private let sendTextField = UITextField()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -35,7 +36,7 @@ class MainPageViewController: UIViewController {
             topBackground.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             topBackground.heightAnchor.constraint(equalToConstant: 150)
         ])
-                
+        
         let deloitteLogoImage = UIImageView()
         deloitteLogoImage.image = UIImage(named: "deloitteLogo")
         deloitteLogoImage.contentMode = .scaleAspectFit
@@ -59,7 +60,7 @@ class MainPageViewController: UIViewController {
             mobileIconImage.heightAnchor.constraint(equalToConstant: 50),
             mobileIconImage.widthAnchor.constraint(equalToConstant: 60)
         ])
-
+        
         //MARK: Temperature - Humidity
         let tempHumBackground = UIImageView()
         tempHumBackground.image = UIImage(named: "attributesBackgroundBig")
@@ -72,7 +73,7 @@ class MainPageViewController: UIViewController {
             tempHumBackground.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -140),
             tempHumBackground.heightAnchor.constraint(equalToConstant: 170)
         ])
-
+        
         let humidityIcon = UIImageView()
         humidityIcon.translatesAutoresizingMaskIntoConstraints = false
         humidityIcon.image = UIImage(named: "icon_droplet")
@@ -83,7 +84,7 @@ class MainPageViewController: UIViewController {
             humidityIcon.widthAnchor.constraint(equalToConstant: 50),
             humidityIcon.heightAnchor.constraint(equalToConstant: 50)
         ])
-
+        
         humidityLabel.translatesAutoresizingMaskIntoConstraints = false
         humidityLabel.text = "32 %"
         humidityLabel.font = UIFont.systemFont(ofSize: 30)
@@ -95,7 +96,7 @@ class MainPageViewController: UIViewController {
             humidityLabel.bottomAnchor.constraint(equalTo: humidityIcon.bottomAnchor),
             humidityLabel.trailingAnchor.constraint(equalTo: tempHumBackground.trailingAnchor, constant: -20)
         ])
-
+        
         let temperatureIcon = UIImageView()
         temperatureIcon.translatesAutoresizingMaskIntoConstraints = false
         temperatureIcon.image = UIImage(named: "icon_temperature")
@@ -106,7 +107,7 @@ class MainPageViewController: UIViewController {
             temperatureIcon.widthAnchor.constraint(equalToConstant: 50),
             temperatureIcon.heightAnchor.constraint(equalToConstant: 50)
         ])
-
+        
         temperatureLabel.translatesAutoresizingMaskIntoConstraints = false
         temperatureLabel.text = "23 °C"
         temperatureLabel.font = UIFont.systemFont(ofSize: 30)
@@ -118,7 +119,7 @@ class MainPageViewController: UIViewController {
             temperatureLabel.bottomAnchor.constraint(equalTo: temperatureIcon.bottomAnchor),
             temperatureLabel.trailingAnchor.constraint(equalTo: tempHumBackground.trailingAnchor, constant: -20)
         ])
-
+        
         //MARK: Button to add topic
         let addBtnBackground = UIView()
         addBtnBackground.backgroundColor = UIColor.init(rgb: 0x92bb45)
@@ -132,7 +133,7 @@ class MainPageViewController: UIViewController {
         ])
         addBtnBackground.layer.cornerRadius = 40
         addBtnBackground.clipsToBounds = true
-
+        
         let addBtn = UILabel()
         addBtn.text = "+"
         addBtn.font = .systemFont(ofSize: 50)
@@ -148,7 +149,7 @@ class MainPageViewController: UIViewController {
             addBtn.widthAnchor.constraint(equalToConstant: 80),
             addBtn.heightAnchor.constraint(equalToConstant: 80)
         ])
-
+        
         //MARK: LED
         let ledBackground = UIImageView()
         ledBackground.image = UIImage(named: "attributesBackgroundBig")
@@ -162,7 +163,7 @@ class MainPageViewController: UIViewController {
             ledBackground.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 140),
             ledBackground.heightAnchor.constraint(equalToConstant: 170)
         ])
-
+        
         let ledIcon = UIImageView()
         ledIcon.translatesAutoresizingMaskIntoConstraints = false
         ledIcon.image = UIImage(named: "icon_light")
@@ -173,7 +174,7 @@ class MainPageViewController: UIViewController {
             ledIcon.widthAnchor.constraint(equalToConstant: 60),
             ledIcon.heightAnchor.constraint(equalToConstant: 60)
         ])
-
+        
         ledSwitch.translatesAutoresizingMaskIntoConstraints = false
         ledSwitch.transform = CGAffineTransformMakeScale(1.3, 1.3)
         view.addSubview(ledSwitch)
@@ -183,7 +184,7 @@ class MainPageViewController: UIViewController {
             ledSwitch.heightAnchor.constraint(lessThanOrEqualToConstant: 60),
             ledSwitch.leadingAnchor.constraint(equalTo: ledIcon.trailingAnchor, constant: 40)
         ])
-
+        
         //MARK: Send text
         let sendTextBackground = UIImageView()
         sendTextBackground.image = UIImage(named: "attributesBackgroundBig")
@@ -196,7 +197,7 @@ class MainPageViewController: UIViewController {
             sendTextBackground.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -140),
             sendTextBackground.heightAnchor.constraint(equalToConstant: 170)
         ])
-
+        
         let sendTextIcon = UIImageView()
         sendTextIcon.translatesAutoresizingMaskIntoConstraints = false
         sendTextIcon.image = UIImage(named: "icon_broadcast")
@@ -207,10 +208,11 @@ class MainPageViewController: UIViewController {
             sendTextIcon.widthAnchor.constraint(equalToConstant: 60),
             sendTextIcon.heightAnchor.constraint(equalToConstant: 60)
         ])
-
+        
         sendTextField.translatesAutoresizingMaskIntoConstraints = false
         sendTextField.backgroundColor = .white
         sendTextField.text = "2"
+        sendTextField.keyboardType = .numberPad
         sendTextField.textAlignment = .center
         view.addSubview(sendTextField)
         NSLayoutConstraint.activate([
@@ -219,7 +221,7 @@ class MainPageViewController: UIViewController {
             sendTextField.heightAnchor.constraint(equalToConstant: 40),
             sendTextField.widthAnchor.constraint(equalToConstant: 50)
         ])
-
+        
         let sendBtn = UIButton()
         sendBtn.backgroundColor = UIColor.init(rgb: 0x92bb45)
         sendBtn.setTitle("Send".uppercased(), for: .normal)
@@ -235,17 +237,49 @@ class MainPageViewController: UIViewController {
             sendBtn.centerYAnchor.constraint(equalTo: sendTextBackground.centerYAnchor)
         ])
     }
-
+    
     @objc func sendTextBtnPressed() {
-        print("Add process ")
+        guard let textToSend = sendTextField.text, textToSend != "" else {
+            let failureAlertDialog = UIAlertController(title: "Error", message: "You need to send a number", preferredStyle: .alert)
+            let okBtn = UIAlertAction(title: "ok ", style: .default)
+            failureAlertDialog.addAction(okBtn)
+            present(failureAlertDialog, animated: true)
+            return
+        }
+        MqttManager.shared.publish(to: "", with: textToSend)
     }
-
+    
     @objc func subscribeToNewTopicBtnPressed() {
         let vc = SubscribeToNewTopicViewController()
         vc.callback = { subscribeText, publishText in
             //FIXME: Add the process to subscribe / publish in topic
+            MqttManager.shared.subscribe(to: tempHumidTopic)
+            MqttManager.shared.subscribe(to: textTopic)
+            MqttManager.shared.subscribe(to: ledTopic)
         }
         vc.modalTransitionStyle = .crossDissolve
         present(vc, animated: true)
+    }
+}
+
+extension MainPageViewController: ReceiveMsgProtocol {
+    
+    func didReceiveMessage(topic: String, message: String?) {
+        if topic == tempHumidTopic {
+            guard let message = message, let data = message.data(using: .utf8) else { return }
+            guard let msgObject = try? JSONDecoder().decode(Message.self, from: data) else { return }
+            temperatureLabel.text = "\(msgObject.temperature)"
+            humidityLabel.text = "\(msgObject.humidity)"
+            
+        } else if topic == ledTopic {
+            switch message {
+            case "0", "1":
+                ledSwitch.isOn = message == "1"
+            default:
+                print("Wrong message")
+            }
+        } else if topic == textTopic {
+            sendTextField.text = message
+        }
     }
 }
