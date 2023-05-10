@@ -14,7 +14,14 @@ class MainPageViewController: UIViewController {
     private let humidityLabel = UILabel()
     private let ledSwitch = UISwitch()
     private let sendTextField = UITextField()
-    
+    private var topicToPublish: String?
+    private let tempIndicator = UIView()
+    private let sendTextIndicator = UIView()
+    private let ledIndicator = UIView()
+    private var tempSubscribed = false
+    private var ledSubscribed = false
+    private var sendTextSubscribed = false
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -97,6 +104,17 @@ class MainPageViewController: UIViewController {
             humidityLabel.trailingAnchor.constraint(equalTo: tempHumBackground.trailingAnchor, constant: -20)
         ])
         
+        tempIndicator.translatesAutoresizingMaskIntoConstraints = false
+        tempIndicator.backgroundColor = .red
+        tempIndicator.layer.cornerRadius = 2.5
+        view.addSubview(tempIndicator)
+        NSLayoutConstraint.activate([
+            tempIndicator.widthAnchor.constraint(equalToConstant: 5),
+            tempIndicator.heightAnchor.constraint(equalToConstant: 5),
+            tempIndicator.centerYAnchor.constraint(equalTo: tempHumBackground.centerYAnchor),
+            tempIndicator.trailingAnchor.constraint(equalTo: tempHumBackground.trailingAnchor, constant: -10)
+        ])
+        
         let temperatureIcon = UIImageView()
         temperatureIcon.translatesAutoresizingMaskIntoConstraints = false
         temperatureIcon.image = UIImage(named: "icon_temperature")
@@ -122,16 +140,16 @@ class MainPageViewController: UIViewController {
         
         //MARK: Button to add topic
         let addBtnBackground = UIView()
-        addBtnBackground.backgroundColor = UIColor.init(rgb: 0x92bb45)
+        addBtnBackground.backgroundColor = greenColor
         addBtnBackground.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(addBtnBackground)
         NSLayoutConstraint.activate([
-            addBtnBackground.heightAnchor.constraint(equalToConstant: 80),
-            addBtnBackground.widthAnchor.constraint(equalToConstant: 80),
+            addBtnBackground.heightAnchor.constraint(equalToConstant: 50),
+            addBtnBackground.widthAnchor.constraint(equalToConstant: 50),
             addBtnBackground.topAnchor.constraint(equalTo: topBackground.bottomAnchor, constant: -10),
             addBtnBackground.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
         ])
-        addBtnBackground.layer.cornerRadius = 40
+        addBtnBackground.layer.cornerRadius = 25
         addBtnBackground.clipsToBounds = true
         
         let addBtn = UILabel()
@@ -145,9 +163,9 @@ class MainPageViewController: UIViewController {
         view.addSubview(addBtn)
         NSLayoutConstraint.activate([
             addBtn.centerXAnchor.constraint(equalTo: addBtnBackground.centerXAnchor),
-            addBtn.centerYAnchor.constraint(equalTo: addBtnBackground.centerYAnchor),
-            addBtn.widthAnchor.constraint(equalToConstant: 80),
-            addBtn.heightAnchor.constraint(equalToConstant: 80)
+            addBtn.centerYAnchor.constraint(equalTo: addBtnBackground.centerYAnchor, constant: -2),
+            addBtn.widthAnchor.constraint(equalTo: addBtnBackground.widthAnchor),
+            addBtn.heightAnchor.constraint(equalTo: addBtnBackground.heightAnchor)
         ])
         
         //MARK: LED
@@ -177,12 +195,26 @@ class MainPageViewController: UIViewController {
         
         ledSwitch.translatesAutoresizingMaskIntoConstraints = false
         ledSwitch.transform = CGAffineTransformMakeScale(1.3, 1.3)
+        ledSwitch.isEnabled = false
+        ledSwitch.onTintColor = greenColor
+        ledSwitch.addTarget(self, action: #selector(chnageStatusOfLed), for: .valueChanged)
         view.addSubview(ledSwitch)
         NSLayoutConstraint.activate([
             ledSwitch.centerYAnchor.constraint(equalTo: ledBackground.centerYAnchor),
             ledSwitch.widthAnchor.constraint(equalToConstant: 60),
             ledSwitch.heightAnchor.constraint(lessThanOrEqualToConstant: 60),
             ledSwitch.leadingAnchor.constraint(equalTo: ledIcon.trailingAnchor, constant: 40)
+        ])
+        
+        ledIndicator.translatesAutoresizingMaskIntoConstraints = false
+        ledIndicator.backgroundColor = .red
+        ledIndicator.layer.cornerRadius = 2.5
+        view.addSubview(ledIndicator)
+        NSLayoutConstraint.activate([
+            ledIndicator.widthAnchor.constraint(equalToConstant: 5),
+            ledIndicator.heightAnchor.constraint(equalToConstant: 5),
+            ledIndicator.centerYAnchor.constraint(equalTo: ledBackground.centerYAnchor),
+            ledIndicator.leadingAnchor.constraint(equalTo: ledBackground.leadingAnchor, constant: 10)
         ])
         
         //MARK: Send text
@@ -211,7 +243,8 @@ class MainPageViewController: UIViewController {
         
         sendTextField.translatesAutoresizingMaskIntoConstraints = false
         sendTextField.backgroundColor = .white
-        sendTextField.text = "2"
+        sendTextField.text = ""
+        sendTextField.delegate = self
         sendTextField.keyboardType = .numberPad
         sendTextField.textAlignment = .center
         view.addSubview(sendTextField)
@@ -223,7 +256,7 @@ class MainPageViewController: UIViewController {
         ])
         
         let sendBtn = UIButton()
-        sendBtn.backgroundColor = UIColor.init(rgb: 0x92bb45)
+        sendBtn.backgroundColor = greenColor
         sendBtn.setTitle("Send".uppercased(), for: .normal)
         sendBtn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         sendBtn.translatesAutoresizingMaskIntoConstraints = false
@@ -236,6 +269,17 @@ class MainPageViewController: UIViewController {
             sendBtn.widthAnchor.constraint(equalToConstant: 80),
             sendBtn.centerYAnchor.constraint(equalTo: sendTextBackground.centerYAnchor)
         ])
+        
+        sendTextIndicator.translatesAutoresizingMaskIntoConstraints = false
+        sendTextIndicator.backgroundColor = .red
+        sendTextIndicator.layer.cornerRadius = 2.5
+        view.addSubview(sendTextIndicator)
+        NSLayoutConstraint.activate([
+            sendTextIndicator.widthAnchor.constraint(equalToConstant: 5),
+            sendTextIndicator.heightAnchor.constraint(equalToConstant: 5),
+            sendTextIndicator.centerYAnchor.constraint(equalTo: sendTextBackground.centerYAnchor),
+            sendTextIndicator.trailingAnchor.constraint(equalTo: sendTextBackground.trailingAnchor, constant: -10)
+        ])
     }
     
     @objc func sendTextBtnPressed() {
@@ -246,19 +290,57 @@ class MainPageViewController: UIViewController {
             present(failureAlertDialog, animated: true)
             return
         }
-        MqttManager.shared.publish(to: "", with: textToSend)
+        MqttManager.shared.publish(to: textTopic, with: textToSend)
     }
     
     @objc func subscribeToNewTopicBtnPressed() {
         let vc = SubscribeToNewTopicViewController()
-        vc.callback = { subscribeText, publishText in
-            //FIXME: Add the process to subscribe / publish in topic
-            MqttManager.shared.subscribe(to: tempHumidTopic)
-            MqttManager.shared.subscribe(to: textTopic)
-            MqttManager.shared.subscribe(to: ledTopic)
+        vc.tempSubscribed = tempSubscribed
+        vc.ledSubscribed = ledSubscribed
+        vc.sendTextSubscribed = sendTextSubscribed
+        vc.publishTextfield.text = topicToPublish
+        vc.callback = { [weak self] tempSubscribed, ledSubscribed, sendTextSubscribed in
+            
+            if self?.tempSubscribed != tempSubscribed {
+                if tempSubscribed {
+                    MqttManager.shared.subscribe(to: tempHumidTopic)
+                } else {
+                    MqttManager.shared.unsubscribe(to: tempHumidTopic)
+                }
+                self?.tempIndicator.backgroundColor = tempSubscribed ? greenColor : .red
+            }
+
+            if self?.ledSubscribed != ledSubscribed {
+                if ledSubscribed {
+                    MqttManager.shared.subscribe(to: ledTopic)
+                } else {
+                    MqttManager.shared.publish(to: ledTopic, with: "0")
+                    self?.ledSwitch.isOn = false
+                    MqttManager.shared.unsubscribe(to: ledTopic)
+                }
+                self?.ledSwitch.isEnabled = ledSubscribed
+                self?.ledIndicator.backgroundColor = ledSubscribed ? greenColor : .red
+            }
+            
+            if self?.sendTextSubscribed != sendTextSubscribed {
+                if sendTextSubscribed {
+                    MqttManager.shared.subscribe(to: textTopic)
+                } else {
+                    MqttManager.shared.unsubscribe(to: textTopic)
+                }
+                self?.sendTextIndicator.backgroundColor = sendTextSubscribed ? greenColor : .red
+            }
+            
+            self?.tempSubscribed = tempSubscribed
+            self?.ledSubscribed = ledSubscribed
+            self?.sendTextSubscribed = sendTextSubscribed
         }
         vc.modalTransitionStyle = .crossDissolve
         present(vc, animated: true)
+    }
+    
+    @objc func chnageStatusOfLed(_ sender: UISwitch) {
+        MqttManager.shared.publish(to: ledTopic, with: sender.isOn ? "1" : "0")
     }
 }
 
@@ -268,8 +350,8 @@ extension MainPageViewController: ReceiveMsgProtocol {
         if topic == tempHumidTopic {
             guard let message = message, let data = message.data(using: .utf8) else { return }
             guard let msgObject = try? JSONDecoder().decode(Message.self, from: data) else { return }
-            temperatureLabel.text = "\(msgObject.temperature)"
-            humidityLabel.text = "\(msgObject.humidity)"
+            temperatureLabel.text = "\(msgObject.temperature)".temperature()
+            humidityLabel.text = "\(msgObject.humidity)".humidity()
             
         } else if topic == ledTopic {
             switch message {
@@ -278,8 +360,14 @@ extension MainPageViewController: ReceiveMsgProtocol {
             default:
                 print("Wrong message")
             }
-        } else if topic == textTopic {
-            sendTextField.text = message
         }
+    }
+}
+
+extension MainPageViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        guard let text = textField.text else { return false}
+        return text.count < 2
     }
 }

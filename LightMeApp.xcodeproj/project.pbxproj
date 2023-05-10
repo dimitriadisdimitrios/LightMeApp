@@ -8,9 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		AEDE3FA22A0B8A69001B949B /* ReceiveMsgProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDE3FA12A0B8A69001B949B /* ReceiveMsgProtocol.swift */; };
-		AEDE3FA52A0B8B20001B949B /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDE3FA42A0B8B20001B949B /* UIColorExtension.swift */; };
 		AEDE3FA82A0B8C80001B949B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDE3FA72A0B8C80001B949B /* Constants.swift */; };
 		AEDE3FAB2A0B8DA8001B949B /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDE3FAA2A0B8DA8001B949B /* Message.swift */; };
+		AEDE3FAE2A0BC8B6001B949B /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDE3FAD2A0BC8B6001B949B /* StringExtensions.swift */; };
 		AEF4F3632A03915C00869FA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF4F3622A03915C00869FA7 /* AppDelegate.swift */; };
 		AEF4F3652A03915C00869FA7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF4F3642A03915C00869FA7 /* SceneDelegate.swift */; };
 		AEF4F3672A03915C00869FA7 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF4F3662A03915C00869FA7 /* LogInViewController.swift */; };
@@ -27,9 +27,9 @@
 		3F601903B83AE1E178F2F3FF /* Pods-LightMeApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LightMeApp.debug.xcconfig"; path = "Target Support Files/Pods-LightMeApp/Pods-LightMeApp.debug.xcconfig"; sourceTree = "<group>"; };
 		ABA472C7F6F9DAFC7B76A54E /* Pods_LightMeApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LightMeApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEDE3FA12A0B8A69001B949B /* ReceiveMsgProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveMsgProtocol.swift; sourceTree = "<group>"; };
-		AEDE3FA42A0B8B20001B949B /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		AEDE3FA72A0B8C80001B949B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		AEDE3FAA2A0B8DA8001B949B /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		AEDE3FAD2A0BC8B6001B949B /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		AEF4F35F2A03915C00869FA7 /* LightMeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LightMeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEF4F3622A03915C00869FA7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AEF4F3642A03915C00869FA7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -67,7 +67,7 @@
 		AEDE3FA32A0B8B11001B949B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				AEDE3FA42A0B8B20001B949B /* UIColorExtension.swift */,
+				AEDE3FAD2A0BC8B6001B949B /* StringExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -270,9 +270,9 @@
 				AEF4F3772A03AC8A00869FA7 /* MainPageViewController.swift in Sources */,
 				AEF4F3672A03915C00869FA7 /* LogInViewController.swift in Sources */,
 				AEF4F3632A03915C00869FA7 /* AppDelegate.swift in Sources */,
-				AEDE3FA52A0B8B20001B949B /* UIColorExtension.swift in Sources */,
 				AEDE3FA22A0B8A69001B949B /* ReceiveMsgProtocol.swift in Sources */,
 				AEF4F3652A03915C00869FA7 /* SceneDelegate.swift in Sources */,
+				AEDE3FAE2A0BC8B6001B949B /* StringExtensions.swift in Sources */,
 				E8E664E42A08256D00750DC1 /* SubscribeToNewTopicViewController.swift in Sources */,
 				AEDE3FAB2A0B8DA8001B949B /* Message.swift in Sources */,
 				E8D3AEC62A0623B300FAB82C /* MqttManager.swift in Sources */,

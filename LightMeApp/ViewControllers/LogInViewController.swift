@@ -102,6 +102,7 @@ class LogInViewController: UIViewController {
         
         usernameTextfield.translatesAutoresizingMaskIntoConstraints = false
         usernameTextfield.backgroundColor = .white
+        usernameTextfield.autocapitalizationType = .none
         usernameTextfield.layer.cornerRadius = 5
         view.addSubview(usernameTextfield)
         NSLayoutConstraint.activate([
@@ -140,6 +141,7 @@ class LogInViewController: UIViewController {
 
         passwordTextfield.translatesAutoresizingMaskIntoConstraints = false
         passwordTextfield.backgroundColor = .white
+        passwordTextfield.autocapitalizationType = .none
         passwordTextfield.layer.cornerRadius = 5
         view.addSubview(passwordTextfield)
         NSLayoutConstraint.activate([
@@ -163,7 +165,7 @@ class LogInViewController: UIViewController {
         ])
         
         let connectBtn = UIButton()
-        connectBtn.backgroundColor = UIColor.init(rgb: 0x92bb45)
+        connectBtn.backgroundColor = greenColor
         connectBtn.setTitle("Connect".uppercased(), for: .normal)
         connectBtn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
         connectBtn.translatesAutoresizingMaskIntoConstraints = false
@@ -193,7 +195,7 @@ class LogInViewController: UIViewController {
     }
     
     @objc func connectBtnPressed(_ sender: UIView) {
-        MqttManager.shared.connect(username: usernameTextfield.text ?? "", password: passwordTextfield.text ?? "", delegate: self)
+        MqttManager.shared.connect(username: usernameTextfield.text ?? "", password: passwordTextfield.text ?? "", delegate: self)        
     }
 }
 

@@ -12,7 +12,7 @@ class MqttManager {
     static let shared = MqttManager()
 
     // MQTT client
-    var mqtt = CocoaMQTT5(clientID: "CocoaMQTT-" + String(ProcessInfo().processIdentifier), host: "mqtt-dashboard.com", port: 8883)
+    var mqtt = CocoaMQTT5(clientID: "CocoaMQTT-" + String(ProcessInfo().processIdentifier), host: mqtt_broker, port: UInt16(mqtt_port))
 
     // Connect to MQTT broker
     func connect(username: String, password: String, delegate: CocoaMQTT5Delegate) {
@@ -30,6 +30,11 @@ class MqttManager {
     // Subscribe to a topic
     func subscribe(to topic: String) {
         mqtt.subscribe(topic)
+    }
+    
+    // Unsubscribe to a topic
+    func unsubscribe(to topic: String) {
+        mqtt.unsubscribe(topic)
     }
 
     // Publish a message to a topic
