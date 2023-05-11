@@ -42,7 +42,7 @@ class SubscribeToNewTopicViewController: UIViewController {
         ])
 
         let tempTopicLabel = UILabel()
-        tempTopicLabel.text = "Publish Topic"
+        tempTopicLabel.text = "Temp Topic"
         tempTopicLabel.font = UIFont.systemFont(ofSize: 20)
         tempTopicLabel.translatesAutoresizingMaskIntoConstraints = false
         alertView.addSubview(tempTopicLabel)

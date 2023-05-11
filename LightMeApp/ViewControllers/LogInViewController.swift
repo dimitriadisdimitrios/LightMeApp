@@ -19,6 +19,22 @@ class LogInViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         setup()
+        setupKeyboardHiding()
+        
+        //Looks for single or multiple taps.
+        let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+    }
+    
+    private func setupKeyboardHiding() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     private func setup() {
@@ -81,7 +97,7 @@ class LogInViewController: UIViewController {
         view.addSubview(usernameBackground)
         NSLayoutConstraint.activate([
             usernameBackground.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            usernameBackground.bottomAnchor.constraint(equalTo: view.centerYAnchor, constant: -30),
+            usernameBackground.bottomAnchor.constraint(equalTo: view.centerYAnchor, constant: -40),
             usernameBackground.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -140),
             usernameBackground.heightAnchor.constraint(equalToConstant: 130)
         ])
@@ -102,6 +118,7 @@ class LogInViewController: UIViewController {
         
         usernameTextfield.translatesAutoresizingMaskIntoConstraints = false
         usernameTextfield.backgroundColor = .white
+        usernameTextfield.textColor = .black
         usernameTextfield.autocapitalizationType = .none
         usernameTextfield.layer.cornerRadius = 5
         view.addSubview(usernameTextfield)
@@ -120,7 +137,7 @@ class LogInViewController: UIViewController {
         view.addSubview(passwordBackground)
         NSLayoutConstraint.activate([
             passwordBackground.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            passwordBackground.topAnchor.constraint(equalTo: view.centerYAnchor, constant: 30),
+            passwordBackground.topAnchor.constraint(equalTo: view.centerYAnchor, constant: 10),
             passwordBackground.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 140),
             passwordBackground.heightAnchor.constraint(equalToConstant: 130)
         ])
@@ -141,6 +158,7 @@ class LogInViewController: UIViewController {
 
         passwordTextfield.translatesAutoresizingMaskIntoConstraints = false
         passwordTextfield.backgroundColor = .white
+        passwordTextfield.textColor = .black
         passwordTextfield.autocapitalizationType = .none
         passwordTextfield.layer.cornerRadius = 5
         view.addSubview(passwordTextfield)
@@ -161,7 +179,7 @@ class LogInViewController: UIViewController {
             bottomBackground.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             bottomBackground.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             bottomBackground.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            bottomBackground.heightAnchor.constraint(equalToConstant: 130)
+            bottomBackground.heightAnchor.constraint(equalToConstant: 120)
         ])
         
         let connectBtn = UIButton()
@@ -197,6 +215,16 @@ class LogInViewController: UIViewController {
     @objc func connectBtnPressed(_ sender: UIView) {
         MqttManager.shared.connect(username: usernameTextfield.text ?? "", password: passwordTextfield.text ?? "", delegate: self)        
     }
+}
+
+extension LogInViewController {
+    @objc func keyboardWillShow(sender: NSNotification) {
+            view.frame.origin.y = view.frame.origin.y - 30
+        }
+
+        @objc func keyboardWillHide(notification: NSNotification) {
+            view.frame.origin.y = 0
+        }
 }
 
 extension LogInViewController: CocoaMQTT5Delegate {
