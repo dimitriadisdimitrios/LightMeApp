@@ -18,10 +18,7 @@ class MainPageViewController: UIViewController {
     private let tempIndicator = UIView()
     private let sendTextIndicator = UIView()
     private let ledIndicator = UIView()
-    private var tempSubscribed = false
-    private var ledSubscribed = false
-    private var sendTextSubscribed = false
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -29,7 +26,6 @@ class MainPageViewController: UIViewController {
         
         //Looks for single or multiple taps.
         let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
-
         view.addGestureRecognizer(tap)
     }
     
@@ -254,7 +250,7 @@ class MainPageViewController: UIViewController {
         sendTextField.translatesAutoresizingMaskIntoConstraints = false
         sendTextField.backgroundColor = .white
         sendTextField.text = ""
-        sendTextField.delegate = self
+//        sendTextField.delegate = self
         sendTextField.keyboardType = .numberPad
         sendTextField.textAlignment = .center
         view.addSubview(sendTextField)
@@ -293,91 +289,11 @@ class MainPageViewController: UIViewController {
     }
     
     @objc func sendTextBtnPressed() {
-        guard let textToSend = sendTextField.text, textToSend != "" else {
-            let failureAlertDialog = UIAlertController(title: "Error", message: "You need to send a number", preferredStyle: .alert)
-            let okBtn = UIAlertAction(title: "ok ", style: .default)
-            failureAlertDialog.addAction(okBtn)
-            present(failureAlertDialog, animated: true)
-            return
-        }
-        MqttManager.shared.publish(to: textTopic, with: textToSend)
     }
     
     @objc func subscribeToNewTopicBtnPressed() {
-        let vc = SubscribeToNewTopicViewController()
-        vc.tempSubscribed = tempSubscribed
-        vc.ledSubscribed = ledSubscribed
-        vc.sendTextSubscribed = sendTextSubscribed
-        vc.publishTextfield.text = topicToPublish
-        vc.callback = { [weak self] tempSubscribed, ledSubscribed, sendTextSubscribed in
-            
-            if self?.tempSubscribed != tempSubscribed {
-                if tempSubscribed {
-                    MqttManager.shared.subscribe(to: tempHumidTopic)
-                } else {
-                    MqttManager.shared.unsubscribe(to: tempHumidTopic)
-                }
-                self?.tempIndicator.backgroundColor = tempSubscribed ? greenColor : .red
-            }
-
-            if self?.ledSubscribed != ledSubscribed {
-                if ledSubscribed {
-                    MqttManager.shared.subscribe(to: ledTopic)
-                } else {
-                    MqttManager.shared.publish(to: ledTopic, with: "0")
-                    self?.ledSwitch.isOn = false
-                    MqttManager.shared.unsubscribe(to: ledTopic)
-                }
-                self?.ledSwitch.isEnabled = ledSubscribed
-                self?.ledIndicator.backgroundColor = ledSubscribed ? greenColor : .red
-            }
-            
-            if self?.sendTextSubscribed != sendTextSubscribed {
-                if sendTextSubscribed {
-                    MqttManager.shared.subscribe(to: textTopic)
-                } else {
-                    MqttManager.shared.unsubscribe(to: textTopic)
-                }
-                self?.sendTextIndicator.backgroundColor = sendTextSubscribed ? greenColor : .red
-            }
-            
-            self?.tempSubscribed = tempSubscribed
-            self?.ledSubscribed = ledSubscribed
-            self?.sendTextSubscribed = sendTextSubscribed
-        }
-        vc.modalTransitionStyle = .crossDissolve
-        present(vc, animated: true)
     }
     
     @objc func chnageStatusOfLed(_ sender: UISwitch) {
-        MqttManager.shared.publish(to: ledTopic, with: sender.isOn ? "1" : "0")
-    }
-}
-
-extension MainPageViewController: ReceiveMsgProtocol {
-    
-    func didReceiveMessage(topic: String, message: String?) {
-        if topic == tempHumidTopic {
-            guard let message = message, let data = message.data(using: .utf8) else { return }
-            guard let msgObject = try? JSONDecoder().decode(Message.self, from: data) else { return }
-            temperatureLabel.text = "\(msgObject.temperature)".temperature()
-            humidityLabel.text = "\(msgObject.humidity)".humidity()
-            
-        } else if topic == ledTopic {
-            switch message {
-            case "0", "1":
-                ledSwitch.isOn = message == "1"
-            default:
-                print("Wrong message")
-            }
-        }
-    }
-}
-
-extension MainPageViewController: UITextFieldDelegate {
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        
-        guard let text = textField.text else { return false}
-        return text.count < 2
     }
 }
