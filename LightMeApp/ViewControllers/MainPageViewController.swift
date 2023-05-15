@@ -18,6 +18,8 @@ class MainPageViewController: UIViewController {
     private let tempIndicator = UIView()
     private let sendTextIndicator = UIView()
     private let ledIndicator = UIView()
+    //Create subscribe to topic flags
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -292,6 +294,8 @@ class MainPageViewController: UIViewController {
     }
     
     @objc func subscribeToNewTopicBtnPressed() {
+        //Show SubscribeToNewTopicViewController
+        
     }
     
     @objc func chnageStatusOfLed(_ sender: UISwitch) {

@@ -10,8 +10,6 @@ import UIKit
 class SubscribeToNewTopicViewController: UIViewController {
 
     var callback: ((Bool, Bool, Bool)->Void)?
-    private let subscribeTextfield = UITextField()
-    let publishTextfield = UITextField()
     var tempSubscribed = false
     var ledSubscribed = false
     var sendTextSubscribed = false

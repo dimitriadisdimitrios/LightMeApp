@@ -210,6 +210,8 @@ class LogInViewController: UIViewController {
     }
     
     @objc func connectBtnPressed(_ sender: UIView) {
+        //Move to MainPageViewController
+        
     }
 }
 
