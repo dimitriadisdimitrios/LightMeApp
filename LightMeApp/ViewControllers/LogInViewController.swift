@@ -13,8 +13,6 @@ class LogInViewController: UIViewController {
     private let usernameTextfield = UITextField()
     private let passwordTextfield = UITextField()
     
-    var receiveProtocol: ReceiveMsgProtocol?
-
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
