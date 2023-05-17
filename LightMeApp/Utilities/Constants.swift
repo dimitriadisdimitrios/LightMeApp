@@ -14,3 +14,5 @@ let tempHumidTopic = "LightMeApp_temp" //ΛΗΨΗ ΘΕΡΜΟΚΡΑΣΙΑΣ ΚΑ�
 let ledTopic = "LightMeApp_led" //ΑΠΟΣΤΟΛΗ ΤΙΜΗΣ 0 'Η 1 ΓΙΑ ΝΑ ΑΝΑΨΕΙ ΤΟ LED
 let textTopic = "LightMeApp_text" //ΑΠΟΣΤΟΛΗ ΚΕΙΜΕΝΟΥ ΓΙΑ ΕΜΦΑΝΙΣΗ
 let greenColor = UIColor(red: 0.5725, green: 0.7333, blue: 0.270588, alpha: 1)
+
+//{"deviceId":"NodeMCU","siteId":"Light Me App","humidity":58,"temperature":24.5}

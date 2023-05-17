@@ -23,7 +23,6 @@ class LogInViewController: UIViewController {
         
         //Looks for single or multiple taps.
         let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
-
         view.addGestureRecognizer(tap)
     }
     
@@ -213,7 +212,9 @@ class LogInViewController: UIViewController {
     }
     
     @objc func connectBtnPressed(_ sender: UIView) {
-        MqttManager.shared.connect(username: usernameTextfield.text ?? "", password: passwordTextfield.text ?? "", delegate: self)        
+        let vc = MainPageViewController()
+        vc.modalPresentationStyle = .overFullScreen
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
@@ -225,68 +226,4 @@ extension LogInViewController {
         @objc func keyboardWillHide(notification: NSNotification) {
             view.frame.origin.y = 0
         }
-}
-
-extension LogInViewController: CocoaMQTT5Delegate {
-    func mqtt5(_ mqtt5: CocoaMQTT5, didConnectAck ack: CocoaMQTTCONNACKReasonCode, connAckData: MqttDecodeConnAck?) {
-        if ack == .success {
-            print("Success - on connection")
-            let vc = MainPageViewController()
-            receiveProtocol = vc
-            vc.modalPresentationStyle = .overFullScreen
-            navigationController?.pushViewController(vc, animated: true)
-        } else {
-            MqttManager.shared.mqtt.disconnect()
-            print("Failure - on connection")
-            let failureAlertDialog = UIAlertController(title: "Error", message: "Failure during connection attempt", preferredStyle: .alert)
-            let okBtn = UIAlertAction(title: "ok ", style: .default)
-            failureAlertDialog.addAction(okBtn)
-            present(failureAlertDialog, animated: true)
-        }
-    }
-
-    func mqtt5(_ mqtt5: CocoaMQTT5, didPublishMessage message: CocoaMQTT5Message, id: UInt16) {
-        print("ASD - 2")
-    }
-
-    func mqtt5(_ mqtt5: CocoaMQTT5, didPublishAck id: UInt16, pubAckData: MqttDecodePubAck?) {
-        print("ASD - 3")
-    }
-
-    func mqtt5(_ mqtt5: CocoaMQTT5, didPublishRec id: UInt16, pubRecData: MqttDecodePubRec?) {
-        print("ASD - 4")
-    }
-
-    func mqtt5(_ mqtt5: CocoaMQTT5, didReceiveMessage message: CocoaMQTT5Message, id: UInt16, publishData: MqttDecodePublish?) {
-        receiveProtocol?.didReceiveMessage(topic: message.topic, message: message.string)
-    }
-
-    func mqtt5(_ mqtt5: CocoaMQTT5, didSubscribeTopics success: NSDictionary, failed: [String], subAckData: MqttDecodeSubAck?) {
-        print("ASD - 6")
-    }
-
-    func mqtt5(_ mqtt5: CocoaMQTT5, didUnsubscribeTopics topics: [String], UnsubAckData: MqttDecodeUnsubAck?) {
-        print("ASD - 7")
-    }
-
-    func mqtt5(_ mqtt5: CocoaMQTT5, didReceiveDisconnectReasonCode reasonCode: CocoaMQTTDISCONNECTReasonCode) {
-        print("ASD - 8")
-    }
-
-    func mqtt5(_ mqtt5: CocoaMQTT5, didReceiveAuthReasonCode reasonCode: CocoaMQTTAUTHReasonCode) {
-        print("ASD - 9")
-    }
-
-    func mqtt5DidPing(_ mqtt5: CocoaMQTT5) {
-        print("ASD - 10")
-    }
-
-    func mqtt5DidReceivePong(_ mqtt5: CocoaMQTT5) {
-        print("ASD - 11")
-    }
-
-    func mqtt5DidDisconnect(_ mqtt5: CocoaMQTT5, withError err: Error?) {
-        MqttManager.shared.mqtt.disconnect()
-        print("ASD - 12 \(String(describing: err?.localizedDescription))")
-    }
 }
