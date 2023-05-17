@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AEDE3FA22A0B8A69001B949B /* ReceiveMsgProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDE3FA12A0B8A69001B949B /* ReceiveMsgProtocol.swift */; };
 		AEDE3FA82A0B8C80001B949B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDE3FA72A0B8C80001B949B /* Constants.swift */; };
 		AEDE3FAE2A0BC8B6001B949B /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDE3FAD2A0BC8B6001B949B /* StringExtensions.swift */; };
 		AEF4F3632A03915C00869FA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEF4F3622A03915C00869FA7 /* AppDelegate.swift */; };
@@ -24,7 +23,6 @@
 /* Begin PBXFileReference section */
 		3F601903B83AE1E178F2F3FF /* Pods-LightMeApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LightMeApp.debug.xcconfig"; path = "Target Support Files/Pods-LightMeApp/Pods-LightMeApp.debug.xcconfig"; sourceTree = "<group>"; };
 		ABA472C7F6F9DAFC7B76A54E /* Pods_LightMeApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LightMeApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		AEDE3FA12A0B8A69001B949B /* ReceiveMsgProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveMsgProtocol.swift; sourceTree = "<group>"; };
 		AEDE3FA72A0B8C80001B949B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		AEDE3FAD2A0BC8B6001B949B /* StringExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		AEF4F35F2A03915C00869FA7 /* LightMeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LightMeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -52,14 +50,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		AEDE3FA02A0B8A41001B949B /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				AEDE3FA12A0B8A69001B949B /* ReceiveMsgProtocol.swift */,
-			);
-			path = Protocols;
-			sourceTree = "<group>";
-		};
 		AEDE3FA32A0B8B11001B949B /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -110,7 +100,6 @@
 				AEDE3FAC2A0B9260001B949B /* ViewControllers */,
 				AEDE3FA62A0B8C6D001B949B /* Utilities */,
 				AEDE3FA32A0B8B11001B949B /* Extensions */,
-				AEDE3FA02A0B8A41001B949B /* Protocols */,
 				AEF4F3622A03915C00869FA7 /* AppDelegate.swift */,
 				AEF4F3642A03915C00869FA7 /* SceneDelegate.swift */,
 				AEF4F3682A03915C00869FA7 /* Main.storyboard */,
@@ -256,7 +245,6 @@
 				AEF4F3772A03AC8A00869FA7 /* MainPageViewController.swift in Sources */,
 				AEF4F3672A03915C00869FA7 /* LogInViewController.swift in Sources */,
 				AEF4F3632A03915C00869FA7 /* AppDelegate.swift in Sources */,
-				AEDE3FA22A0B8A69001B949B /* ReceiveMsgProtocol.swift in Sources */,
 				AEF4F3652A03915C00869FA7 /* SceneDelegate.swift in Sources */,
 				AEDE3FAE2A0BC8B6001B949B /* StringExtensions.swift in Sources */,
 				E8E664E42A08256D00750DC1 /* SubscribeToNewTopicViewController.swift in Sources */,
